@@ -1,0 +1,92 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LINE WORKS Incoming Webhook",
+    "description": "This is a custom connector for LINE WORKS Incoming Webhook",
+    "version": "1.0"
+  },
+  "host": "webhook.worksmobile.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/message/{webhookId}": {
+      "post": {
+        "summary": "LINE WORKS Incoming Webhook",
+        "operationId": "LWwebhook",
+        "parameters": [
+          {
+            "name": "webhookId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "メッセージのタイトル。指定がない場合はデフォルトのタイトルが使用されます。"
+                },
+                "body": {
+                  "type": "object",
+                  "required": [
+                    "text"
+                  ],
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "description": "メッセージのテキスト"
+                    }
+                  }
+                },
+                "button": {
+                  "type": "object",
+                  "required": [
+                    "label",
+                    "url"
+                  ],
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "description": "ボタンのラベル"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "ボタンのURL"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "default": {
+            "description": "エラーが発生しました"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {},
+  "security": [],
+  "tags": []
+}
